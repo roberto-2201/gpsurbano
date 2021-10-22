@@ -1,0 +1,35 @@
+<p>MAPA</p>
+<button (click)="irUnidades()" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+    Ver ruta</button>
+
+    <div class="wrapper">
+        <button (click)="drawRoute()" class="btn-route">MOSTRAR RUTA</button>
+        <!-- <button (click)="testMarker()" class="btn-route">Marcador</button> -->
+      </div>
+
+      <div class="wrapper">
+        <div class="box-inputs">
+      <!--     
+          <div>
+            <div id="geocoder" #asGeoCoder class="geocoder"></div>
+          </div> -->
+      
+      
+          <!-- <div (click)="changeMode('start')" [ngClass]="{'active-way':modeInput ==='start'}">
+            <div class="mock-label">Inicio</div>
+            <div class="mock-input">{{wayPoints?.start?.place_name}}</div>
+          </div> -->
+      
+          <!-- <div (click)="changeMode('end')" [ngClass]="{'active-way':modeInput ==='end'}">
+            <div class="mock-label">Final</div>
+            <div class="mock-input">{{wayPoints?.end?.place_name}}</div>
+          </div> -->
+      
+        </div>
+      </div>
+      
+      <div class="wrapper" ng-init="drawRoute()" >
+      
+        <div id="map" #asMap class="map-container"></div>
+      
+      </div>
