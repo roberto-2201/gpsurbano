@@ -5,7 +5,7 @@ import { UnidadesComponent } from './unidades/unidades.component';
 
 const routes: Routes = [
   {  path: 'unidades', component: UnidadesComponent },
-  { path: 'mapa', component: MapaComponent },
+  { path: 'mapa/:ruta', component: MapaComponent },
   { path: '', redirectTo: '/unidades', pathMatch: 'full'  }
 ];
 

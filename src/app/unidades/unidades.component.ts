@@ -12,10 +12,13 @@ export class UnidadesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  navegarMapa(){
-   this.router.navigate(['/mapa/']);
-
+  mapaTunas(){
+   this.router.navigate(['/mapa/TUNAS']);
    }
+
+   mapaMetro(){
+    this.router.navigate(['/mapa/METRO']);
+    }
    
 
 }

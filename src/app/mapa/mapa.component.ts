@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MapCustomService } from '../map-custom.service';
-import {Socket} from "ngx-socket-io";
+import { Socket } from "ngx-socket-io";
 
 @Component({
   selector: 'app-mapa',
@@ -11,15 +11,32 @@ import {Socket} from "ngx-socket-io";
 export class MapaComponent implements OnInit {
   @ViewChild('asGeoCoder') asGeoCoder: ElementRef;
   modeInput = 'start';
-  wayPoints: WayPoints = {start: null, end: null};
+  wayPoints: WayPoints = { start: null, end: null };
+  ruta = '';
+  mostrarRuta={
+    ruta:'',
+    ico:''
+  };
   constructor(private router: Router,
-    private mapCustomService: MapCustomService, 
+    private mapCustomService: MapCustomService,
     private renderer2: Renderer2,
-    private socket: Socket) { }
+    private socket: Socket,
+    private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.ruta = '';
+    this.ruta = this._route.snapshot.paramMap.get('ruta');
+    this.mostrarRuta
+    if (this.ruta === 'TUNAS') {
+      this.mostrarRuta.ruta='UNI1';
+      this.mostrarRuta.ico='marker';
+    }else if (this.ruta === 'METRO') {
+      this.mostrarRuta.ruta='UNI2';
+      this.mostrarRuta.ico='bus';
+    }
+    
     this.mapCustomService.buildMap()
-      .then(({geocoder, map}) => {
+      .then(({ geocoder, map }) => {
         // this.asGeoCoder
         this.renderer2.appendChild(this.asGeoCoder.nativeElement,
           geocoder.onAdd(map)
@@ -43,42 +60,22 @@ export class MapaComponent implements OnInit {
 
 
     //Recibe coord bus1
-    this.socket.fromEvent('UNI1')
+    this.socket.fromEvent(this.mostrarRuta.ruta)
       .subscribe((coords: string) => {
-        console.log(coords);
-        
-        const newCord=coords.split(',');
-       const cors =[parseFloat(newCord[1]),parseFloat(newCord[0])];
-       console.log('UNI1:', cors);
-        this.mapCustomService.addMarkerCustom(cors,'marker');
-      });
 
-      //Recibe coord bus3
-      this.socket.fromEvent('UNI2')
-      .subscribe((coords: string) => {
-        console.log(coords);
-        
-        const newCord=coords.split(',');
-       const cors =[parseFloat(newCord[1]),parseFloat(newCord[0])];
-       console.log('UNI2:', cors);
-        this.mapCustomService.addMarkerCustom(cors,'bus2');
-      });
+        const newCord = coords.split(',');
+        const cors = [parseFloat(newCord[1]), parseFloat(newCord[0])];
+        console.log('RUTA: ',this.mostrarRuta.ruta);
 
-      //Recibe coord bus3
-      this.socket.fromEvent('UNI3')
-      .subscribe((coords: string) => {
-        console.log(coords);
-        
-        const newCord=coords.split(',');
-       const cors =[parseFloat(newCord[1]),parseFloat(newCord[0])];
-       console.log('UNI3:', cors);
-        this.mapCustomService.addMarkerCustom(cors,'bus');
-      });
+        this.mapCustomService.addMarkerCustom(cors, this.mostrarRuta.ico);
 
-      this.socket.fromEvent('message')
+      });
+   
+  
+    this.socket.fromEvent('message')
       .subscribe((ms) => {
         console.log('Message server: ', ms);
-        
+
       });
 
   }
@@ -86,12 +83,12 @@ export class MapaComponent implements OnInit {
   drawRoute(): void {
     console.log('***** PUNTOS de ORIGEN y DESTINO', this.wayPoints)
     const coords = [
-      [-89.8939141,14.2876664],
-      [-89.8829917,14.2811682]
+      [-89.8939141, 14.2876664],
+      [-89.8829917, 14.2811682]
     ];
     console.log(coords);
-    
-    this.mapCustomService.loadCoords(coords);
+
+    this.mapCustomService.loadCoords(coords, this.ruta);
   }
 
   changeMode(mode: string): void {
@@ -99,11 +96,11 @@ export class MapaComponent implements OnInit {
   }
 
   testMarker(): void {
-    this.mapCustomService.addMarkerCustom([-8.628139488926513, 41.159082702543635],'marker');
+    this.mapCustomService.addMarkerCustom([-8.628139488926513, 41.159082702543635], 'marker');
   }
 
 
-  irUnidades(){
+  irUnidades() {
     this.router.navigate(['/unidades/']);
   }
 

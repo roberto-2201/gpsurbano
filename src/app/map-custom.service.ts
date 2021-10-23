@@ -10,6 +10,7 @@ import { Socket } from "ngx-socket-io";
 })
 export class MapCustomService {
   cbAddress: EventEmitter<any> = new EventEmitter<any>();
+  mostrar = '';
 
   mapbox = (mapboxgl as typeof mapboxgl);
   map: mapboxgl.Map;
@@ -204,6 +205,65 @@ export class MapCustomService {
     [-89.90222966321753, 14.293648371574927],
 
   ];
+  rutaMetroPlaza: any[] = [
+    [-89.91156100715068, 14.293452242534368],
+    [-89.90877328980372, 14.293936530328098],
+    [-89.90571226705264, 14.29381545848184],
+    [-89.90343211745235, 14.293573314593798],
+    [-89.90192721246497, 14.293695439757098],
+    [-89.9003590760765, 14.292796524642178],
+    [-89.89735532186758, 14.291169907205965],
+    [-89.89719627727585, 14.29093061805713],
+    [-89.89699325025666, 14.2904311895964],
+    [-89.8964466390511, 14.289296120789023],
+    [-89.89589412056486, 14.288544726269976],
+    [-89.89444547333426, 14.287964294393305],
+    [-89.89422724762136, 14.287865305853023],
+    [-89.89425629416134, 14.2876695164605],
+    [-89.89428415275854, 14.287408546262844],
+    [-89.89427486655948, 14.287332054940645],
+    [-89.89419129076786, 14.287183571711555],
+    [-89.89399163748789, 14.287084582837739],
+    [-89.89399628059294, 14.28670662491395],
+    [-89.89413209063936, 14.286149505099466],
+    [-89.89430388273254, 14.28595275650539],
+    [-89.89446005736269, 14.285843031253213],
+    [-89.8948231633778, 14.285759791371024],
+    [-89.8947491790193, 14.285625855594125],
+    [-89.89482140869694, 14.284811353196188],
+    [-89.89516942441658, 14.284105024511225],
+    [-89.89550545763991, 14.28345988400547],
+    [-89.8957981028474, 14.28293549341687],
+    [-89.89619523829319, 14.282117364390949],
+    [-89.89623534134306, 14.282010979676334],
+    [-89.8965417905688, 14.28215277987323],
+    [-89.89728444675539, 14.282420327168678],
+    [-89.89807679742322, 14.282829673916389],
+    [-89.89892943783121, 14.283167550353419],
+    [-89.89928282070488, 14.283526062043501],
+    [-89.89963620357528, 14.283999617652182],
+    [-89.89950311877196, 14.283832347778047],
+    [-89.89994885632723, 14.284264305151085],
+    [-89.8997116290885, 14.285631342950106],
+    [-89.89966519809317, 14.285748330551888],
+    [-89.89882944017704, 14.286882207233063],
+    [-89.8981597281962, 14.287309154513888],
+    [-89.8966920652193, 14.288650683317702],
+    [-89.89611781801173, 14.288313583011359],
+    [-89.89659445815113, 14.288596780165276],
+    [-89.89583768998342, 14.28814684178634],
+    [-89.89463158564848, 14.287990953934864],
+    [-89.89206822579155, 14.28785096301463],
+    [-89.89198599762727, 14.288104768234597],
+    [-89.89199704084123, 14.288275994009709],
+    [-89.89212836763345, 14.288307810084607],
+    [-89.89444628365285, 14.288676876113641],
+    [-89.89549689714609, 14.289300469062754],
+    [-89.89640813184519, 14.29016481192639],
+    [-89.89690030039581, 14.290664248506936]
+  ]
+
+
 
 
   constructor(private httpClient: HttpClient, private socket: Socket) {
@@ -252,92 +312,115 @@ export class MapCustomService {
     });
   }
 
-  loadCoords(coords): void {
+  loadCoords(coords, ruta): void {
 
-    const url = [
-      `https://api.mapbox.com/directions/v5/mapbox/driving/`,
-      `${coords[0][0]},${coords[0][1]};${coords[1][0]},${coords[1][1]}`,
-      `?steps=true&geometries=geojson&access_token=${environment.mapPk}`,
-    ].join('');
-    //`,-89.8939141,14.2876664;-89.8829917,14.2811682`,
-    this.httpClient.get(url).subscribe((res: any) => {
+    /*  const url = [
+       `https://api.mapbox.com/directions/v5/mapbox/driving/`,
+       `${coords[0][0]},${coords[0][1]};${coords[1][0]},${coords[1][1]}`,
+       `?steps=true&geometries=geojson&access_token=${environment.mapPk}`,
+     ].join('');
+     //`,-89.8939141,14.2876664;-89.8829917,14.2811682`,
+     this.httpClient.get(url).subscribe((res: any) => {
+  */
+
+    //const data = res.routes[0];
+    const route1 = this.rutaTunas;
+    const route2 = this.rutaMetroPlaza;
+    const route = ruta === 'TUNAS' ? route1 : route2;
+
+    console.log('RUTA', route);
+    console.log('RUTA T', this.rutaTunas);
 
 
-      const data = res.routes[0];
-      const route = this.rutaTunas;
-
-      console.log('RUTA', route);
-      console.log('RUTA T', this.rutaTunas);
-
-
-      this.map.addSource('route', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates: route
-          }
+    this.map.addSource('route', {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route
         }
-      });
-
-      //pinta la ruta en el mapa
-      this.map.addLayer({
-        id: 'route',
-        type: 'line',
-        source: 'route',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
-        paint: {
-          'line-color': 'red',
-          'line-width': 8
-        }
-      });
-
-      this.wayPoints = route;
-      this.map.fitBounds([route[0], route[route.length - 1]], {
-        padding: 70
-      });
-
-      this.socket.emit('find-driver', { points: route });
-
+      }
     });
+
+    //pinta la ruta en el mapa
+    this.map.addLayer({
+      id: 'route',
+      type: 'line',
+      source: 'route',
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': 'red',
+        'line-width': 8
+      }
+    });
+
+    this.wayPoints = route;
+    this.map.fitBounds([route[0], route[route.length - 1]], {
+      padding: 70
+    });
+
+    this.socket.emit('find-driver', { points: route });
+
+    //});
 
 
   }
 
   addMarkerCustom(coords, image): void {
-    console.log('----->', coords)
+
     const el = document.createElement('div');
     el.className = image;
     if (image === 'marker') {
+
       if (!this.markerDriver) {
         this.markerDriver = new mapboxgl.Marker(el);
       } else {
+        if(this.markerDriver2){
+          this.markerDriver2.remove();
+          console.log('METRO ELIMINADO');
+
+        }
         this.markerDriver
           .setLngLat(coords)
           .addTo(this.map);
       }
+
+
     } else if (image === 'bus') {
+
       if (!this.markerDriver2) {
         this.markerDriver2 = new mapboxgl.Marker(el);
       } else {
+        if(this.markerDriver){
+          this.markerDriver.remove();
+          console.log('TUNAS ELIMINADO');
+          
+        }
         this.markerDriver2
           .setLngLat(coords)
           .addTo(this.map);
       }
+
     } else if (image === 'bus2') {
+
       if (!this.markerDriver3) {
         this.markerDriver3 = new mapboxgl.Marker(el);
       } else {
+
         this.markerDriver3
           .setLngLat(coords)
           .addTo(this.map);
       }
+
+
     }
 
   }
+
+  
 }
