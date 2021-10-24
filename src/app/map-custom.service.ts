@@ -380,11 +380,7 @@ export class MapCustomService {
       if (!this.markerDriver) {
         this.markerDriver = new mapboxgl.Marker(el);
       } else {
-        if(this.markerDriver2){
-          this.markerDriver2.remove();
-          console.log('METRO ELIMINADO');
-
-        }
+      
         this.markerDriver
           .setLngLat(coords)
           .addTo(this.map);
@@ -396,11 +392,7 @@ export class MapCustomService {
       if (!this.markerDriver2) {
         this.markerDriver2 = new mapboxgl.Marker(el);
       } else {
-        if(this.markerDriver){
-          this.markerDriver.remove();
-          console.log('TUNAS ELIMINADO');
-          
-        }
+        
         this.markerDriver2
           .setLngLat(coords)
           .addTo(this.map);
