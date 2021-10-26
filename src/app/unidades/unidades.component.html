@@ -1,23 +1,44 @@
-<nav class="flex items-center bg-gray-800 p-3 flex-wrap">
+<nav class="flex items-center bg-gray-900 p-3 flex-wrap">
     <a href="/unidades" class="p-2 mr-4 inline-flex items-center">
         <img src="./assets/image/logo1.png" class="logo">
-        <span class="text-xl text-white font-bold uppercase tracking-wide">SGUB JUIAPA</span>
+        
     </a>
-    <button
-        class="text-white inline-flex p-3 hover:bg-gray-900 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler"
-        data-target="#navigation">
-        RB
-    </button>
+<div >
+    <span class="text-xl text-white font-bold uppercase tracking-wide">Sistema de Geolocalizacion de Urbanas en Jutiapa</span>
+</div>
+
     <div class="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto" id="navigation">
         <div
             class="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
             <a href="#"
                 class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white">
-                <span>Sistema de geolocalizacion JUtiapa</span>
+                
+            
             </a>
         </div>
     </div>
 </nav>
+          
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+<div  id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="./assets/img_chidas/nube.jpg" class="d-block w-100" calt="primero">
+      </div>
+      <div class="carousel-item">
+        <img src="./assets/img_chidas/lices.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="./assets/img_chidas/noche.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+  </div>
+
+  <p class=" font-bold text-xl bg-dark text-center text-white">Rutas En Funcionamiento</p>
+  
 
 <div class="grid lg:grid-cols-2 p-8 gap-8 sm:grid-cols-1 ">
     <div class="rounded-xl shadow-xl">
@@ -28,20 +49,33 @@
                     Ruta Metro Plaza Jutiapa
                 </div>
             </div>
-            <h2 class="text-2x1 mt-2 font-bold ">
-
-                Aproximadamente 2400 usuarios
-            </h2>
+            <h5 class="text-center">Ruta metro plaza es una línea de transporte Urbano al servicio de la población 
+                Jutiapaneca que realiza su recorrido desde El Centro Comercial Metro Plaza Jutiapa, pasando Por la
+                 calle 15 de septiembre, seguido del Parque Departamental con Destino final hacia La Comunidad de Las
+                  Crucitas La cual se compone por 2 Colonias y Una aldea siendo estas Col.Santa Bárbara Col.Maria 
+                  Eugenia y Ald. Las crucitas</h5>
+                  <div class="flex flex-row mt-4 items-center">
+                    <img class="rounded-full mr-2" src="./assets/img/pasaje.png">
+                    <div  class="font-bold mr-2">Promedio de pasajeros 4200 Por Dia</div>
+                  
+                </div>
             <div class="flex flex-row mt-4 items-center">
                 <img class="rounded-full mr-2" src="./assets/image/castrol2.jpg">
-                <div class="font-bold mr-2">John Smith</div>
+                <div class="font-bold mr-2">Piloto. Hector Castro</div>
+                <img class="rounded-full mr-2" src="./assets/img/placa.png">
+                <div class="font-bold mr-2">Unidad: P7B58V</div>
             </div>
-            <button (click)="mapaMetro()"
+        <div class="text-center">
+            <button  (click)="mapaMetro()"
                 class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                 Ver ruta</button>
-
+    </div>
         </div>
     </div>
+
+
+
+
 
     <div class="rounded-xl shadow-xl">
         <img class="w-full rounded-t-xl h-36 object-cover" src="./assets/image/tunas.jpg">
@@ -52,22 +86,130 @@
                     Ruta Las Tunas Jutiapa
                 </div>
             </div>
+            <h5 class="text-center">Ruta Tunas Jutiapa es una línea de Transporte Urbano al servicio de la Población Jutiapaneca que realiza su recorrido desde la Comunidad de Aldea Las Tunas pasando por la calle 15 de septiembre 
+                seguido por el Parque Departamental Pasando por el Hospital nacional de Jutiapa y Finalizando en el Complejo deportivo</h5>
 
-            <h2 class="text-2x1 mt-2 font-bold ">
-                Aproximadamente 5000 usuarios
-            </h2>
-
-
-
+                <div class="flex flex-row mt-4 items-center">
+                    <img class="rounded-full mr-2" src="./assets/img/pasaje.png">
+                    <div class="font-bold mr-2">Promedio de pasajeros 900 Por Dia</div>
+                    
+                    
+                </div>
             <div class="flex flex-row mt-4 items-center">
                 <img class="rounded-full mr-2" src="./assets/image/sazo_opt.jpg">
                 <div class="font-bold mr-2">Piloto. Mario Cordero</div>
+                <img class="rounded-full mr-2" src="./assets/img/placa.png">
+                <div class="font-bold mr-2">Unidad: PL596MB</div>
                 
-            </div>
+            </div >
+        <div class="text-center">
             <button (click)="mapaTunas()"
                 class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                 Ver ruta</button>
-
+        </div>
         </div>
     </div>
+
+
+
+        
+
+
+
+
+
+        
+
+
+
+
+    <div class="rounded-xl shadow-xl">
+        <img class="w-full rounded-t-xl h-36 object-cover" src="./assets/img/villaH.jpg">
+        <div class="p6">
+
+            <div class="flex flex-row">
+                <div class="uppercase text-xs text-yellow-700 bg-yellow-200 px-2 py-1 rounded-xl">
+                    Ruta Colonia Villa Hermoza
+                </div>
+            </div>
+            <h5 class="text-center">Ruta Colonia Villa Hermosa es una línea de Transporte Urbano al servicio de la Población Jutiapaneca que realiza su recorrido desde la Colonia Villa
+                 Hermosa pasando por la Carretera Interamericana seguido por el Parque Departamental Pasando por el Hospital nacional de Jutiapa y Finalizando en el Cementerio Municipal.</h5>
+
+                <div class="flex flex-row mt-4 items-center">
+                    <img class="rounded-full mr-2" src="./assets/img/pasaje.png">
+                    <div class="font-bold mr-2">Promedio de pasajeros 1000 Por Dia</div>
+                    
+                    
+                </div>
+            <div class="flex flex-row mt-4 items-center">
+                <img class="rounded-full mr-2" src="./assets/img/yo_opt.jpg">
+                <div class="font-bold mr-2">Piloto. Robert Baratheon</div>
+                <img class="rounded-full mr-2" src="./assets/img/placa.png">
+                <div class="font-bold mr-2">Unidad: PL596MB</div>
+                
+            </div >
+        <div class="text-center">
+            <button (click)="mapaTunas()"
+                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                Ver ruta</button>
+        </div>
+        </div>
+    </div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="rounded-xl shadow-xl">
+        <img class="w-full rounded-t-xl h-36 object-cover" src="./assets/img/29.jpg">
+        <div class="p6">
+
+            <div class="flex flex-row">
+                <div class="uppercase text-xs text-yellow-700 bg-yellow-200 px-2 py-1 rounded-xl">
+                    Ruta Colonia 29 de Diciembre
+                </div>
+            </div>
+            <h5 class="text-center">Ruta Colonia 29 de diciembre es una línea de Transporte Urbano al servicio de la Población Jutiapaneca que realiza su recorrido desde la Colonia 29 de diciembre
+                 pasando por el Mercado Municipal seguido por el Parque Departamental Pasando por el Hospital nacional de Jutiapa y Finalizando en el Complejo deportivo.</h5>
+
+                <div class="flex flex-row mt-4 items-center">
+                    <img class="rounded-full mr-2" src="./assets/img/pasaje.png">
+                    <div class="font-bold mr-2">Promedio de pasajeros 1600 Por Dia</div>
+                    
+                    
+                </div>
+            <div class="flex flex-row mt-4 items-center">
+                <img class="rounded-full mr-2" src="./assets/img/ROLO_opt.jpg">
+                <div class="font-bold mr-2">Piloto. Aron Ortiz</div>
+                <img class="rounded-full mr-2" src="./assets/img/placa.png">
+                <div class="font-bold mr-2">Unidad: PM696MB</div>
+                
+            </div >
+        <div class="text-center">
+            <button (click)="mapaTunas()"
+                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                Ver ruta</button>
+        </div>
+        </div>
+    </div>
+        
+
+
+
+            
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            
+        
 </div>
