@@ -10,7 +10,7 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LoginGuard } from './login.guard';
-const config: SocketIoConfig = {url: 'http://18.116.58.150:3000/', options: {}};
+const config: SocketIoConfig = {url: 'http://18.116.58.150:3000/', options: {}}; // con esta direccion me conecto al socket io
 
 @NgModule({
   declarations: [

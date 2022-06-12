@@ -2,11 +2,21 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+//variables de entorno
+
+
+//nuestra llave de prueba de mapbox
 export const environment = {
   production: false,
   mapPk: 'pk.eyJ1Ijoicm9ic3RhcmsiLCJhIjoiY2t0a3E1MGN1MW84YzMycWZiNmZoZ2hzMiJ9.2iUEOBP3NT-bpemmGHdN4w'
 
 };
+
+
+
+
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

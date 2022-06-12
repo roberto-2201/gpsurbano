@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';// importamos los paquetes
 import { MapCustomService } from '../map-custom.service';
 import { Socket } from "ngx-socket-io";
 
@@ -8,6 +8,8 @@ import { Socket } from "ngx-socket-io";
   templateUrl: './mapa.component.html',
   styleUrls: ['./mapa.component.css']
 })
+
+//incializamos las variables 
 export class MapaComponent implements OnInit {
   @ViewChild('asGeoCoder') asGeoCoder: ElementRef;
   modeInput = 'start';
@@ -28,16 +30,17 @@ export class MapaComponent implements OnInit {
     this.ruta = this._route.snapshot.paramMap.get('ruta');
     this.mostrarRuta
     if (this.ruta === 'TUNAS') {
-      this.mostrarRuta.ruta='UNI1';
+      this.mostrarRuta.ruta='UNI1';//evento a selecionar
       this.mostrarRuta.ico='marker';
-    }else if (this.ruta === 'METRO') {
+    }
+    else if (this.ruta === 'METRO') {
       this.mostrarRuta.ruta='UNI2';
       this.mostrarRuta.ico='bus';
     }
     
-    this.mapCustomService.buildMap()
-      .then(({ geocoder, map }) => {
-        // this.asGeoCoder
+    this.mapCustomService.buildMap()   // mandamos el mapa al id de map
+      .then(({ geocoder, map }) => {    // geocoder busca la direccion 
+
         this.renderer2.appendChild(this.asGeoCoder.nativeElement,
           geocoder.onAdd(map)
         );
@@ -49,8 +52,11 @@ export class MapaComponent implements OnInit {
         console.log('******* ERROR ******', err);
       });
 
+
+
+
     this.mapCustomService.cbAddress.subscribe((getPoint) => {
-      if (this.modeInput === 'start') {
+      if (this.modeInput === 'start') { //punto inicial y punto final de la ruta seleccionada
         this.wayPoints.start = getPoint;
       }
       if (this.modeInput === 'end') {
@@ -59,24 +65,21 @@ export class MapaComponent implements OnInit {
     });
 
 
-    //Recibe coord bus1
-    this.socket.fromEvent(this.mostrarRuta.ruta)
+    //Recibe coord bus1   fromevent resive los datos
+    this.socket.fromEvent(this.mostrarRuta.ruta)  //esperamos el evento seleccionaso en el nginit
       .subscribe((coords: string) => {
 
-        const newCord = coords.split(',');
-        const cors = [parseFloat(newCord[1]), parseFloat(newCord[0])];
-        console.log('RUTA: ',this.mostrarRuta.ruta);
+        const newCord = coords.split(',');// resibimos las cordenadas las separamos por coma resibidos por string
+        const cors = [parseFloat(newCord[1]), parseFloat(newCord[0])];// los convertimos a cordenadas reales se guarda en cors [12,12]
+        console.log('RUTA: ',this.mostrarRuta.ruta);//muestra las rutas obtenidas  al seleccionar ver ruta
 
         this.mapCustomService.addMarkerCustom(cors, this.mostrarRuta.ico);
 
       });
    
-  
-    this.socket.fromEvent('message')
-      .subscribe((ms) => {
-        console.log('Message server: ', ms);
-
-      });
+      
+      this.mapCustomService.cargarParadasTunas();
+    
 
   }
 
@@ -89,6 +92,7 @@ export class MapaComponent implements OnInit {
     console.log(coords);
 
     this.mapCustomService.loadCoords(coords, this.ruta);
+
   }
 
   changeMode(mode: string): void {
