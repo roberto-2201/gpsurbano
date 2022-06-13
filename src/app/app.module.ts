@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginGuard } from './login.guard';
 
 //IP SERVER SOCKET NODE JS
-const config: SocketIoConfig = {url: 'http://192.168.0.9:3002/', options: {}}; // con esta direccion me conecto al socket io
+const config: SocketIoConfig = {url: 'http://34.238.250.67:3002/', options: {}}; // con esta direccion me conecto al socket io
 
 @NgModule({
   declarations: [
